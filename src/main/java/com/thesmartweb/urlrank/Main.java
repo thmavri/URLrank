@@ -11,29 +11,46 @@ package com.thesmartweb.urlrank;
  */
 public class Main {
     public static void main(String[] args) {
-        String domain="nba.com";
-        String query="nba";
-        int results_number=50;
+        String domain="nba.com";//set your domain
+        String[] queries=new String[2];
+        queries[0]="nba";//set your queries
+        queries[1]="basketball";
+        //-------------------------------
+        int results_number=50;//results number of SERPs (max is 50)
+        //----------Google API keys------------
+        String[] apikeys = new String[2];
+        String[] cxs = new String[2];
+        apikeys[0]="your api key here";
+        apikeys[1]="your api key here";
+        cxs[0]="your cxs key here";
+        cxs[1]="your cxs key here";
+        //-----------Bing API keys--------------
+        String[] accKeys=new String[2];
+        accKeys[0]="your bing api key here";//thmavri8436
+        accKeys[1]="your bing api key here";
+        //-----------------------------------------
         GoogleResults google=new GoogleResults();
-        String[] gres=google.Get(query, results_number);
         BingResults bing=new BingResults();
-        String[] bres=bing.Get(query, results_number);
-        for (int i=0;i<gres.length;i++){
-            if(gres[i]!=null){
-                if(gres[i].contains(domain)){
-                    System.out.println("Google Rank for "+query+":"+(i+1));
-                    break;
+        //----------get the results for every query-------
+        for(String query:queries){
+            String[] gres=google.Get(query, results_number, apikeys, cxs);//get google results
+            String[] bres=bing.Get(query, results_number, accKeys);//get bing results
+            for (int i=0;i<gres.length;i++){
+                if(gres[i]!=null){
+                    if(gres[i].contains(domain)){
+                        System.out.println("Google Rank for "+query+":"+(i+1));
+                        break;
+                    }
+                }
+            }
+            for (int i=0;i<bres.length;i++){
+                if(bres[i]!=null){
+                    if(bres[i].contains(domain)){
+                        System.out.println("Bing Rank for "+query+":"+(i+1));
+                        break;
+                    }
                 }
             }
         }
-        for (int i=0;i<bres.length;i++){
-            if(bres[i]!=null){
-                if(bres[i].contains(domain)){
-                    System.out.println("Bing Rank for "+query+":"+(i+1));
-                    break;
-                }
-            }
-        }
-        
     }
 }
