@@ -26,7 +26,7 @@ public class Main {
         cxs[1]="your cxs key here";
         //-----------Bing API keys--------------
         String[] accKeys=new String[2];
-        accKeys[0]="your bing api key here";//thmavri8436
+        accKeys[0]="your bing api key here";
         accKeys[1]="your bing api key here";
         //-----------------------------------------
         GoogleResults google=new GoogleResults();
